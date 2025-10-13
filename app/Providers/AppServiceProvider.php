@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\architecture\onion\domain\repository\ProductRepositoryInterface;
-use App\architecture\onion\infrastructure\persistence\ProductRepository;
+use App\infrastructure\persistence\ProductRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

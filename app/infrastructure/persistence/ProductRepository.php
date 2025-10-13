@@ -1,10 +1,9 @@
 <?php
 
-namespace App\architecture\onion\infrastructure\persistence;
+namespace App\infrastructure\persistence;
 
 use App\architecture\onion\domain\entity\AbstractEntity;
 use App\architecture\onion\domain\repository\ProductRepositoryInterface;
-use App\architecture\onion\domain\repository\RepositoryInterface;
 use App\Models\Product as Model;
 
 class ProductRepository implements ProductRepositoryInterface
