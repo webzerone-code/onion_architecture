@@ -7,6 +7,8 @@ class Product extends AbstractEntity
 {
     private Category $category;
     private Tag $tag;
+
+    private ?Shipping $shipping = null;
     public string $productTitle;
     public string $productDescription;
     public string $productImage;
@@ -70,5 +72,15 @@ class Product extends AbstractEntity
     public function setProductPrice(float $productPrice): void
     {
         $this->productPrice = $productPrice;
+    }
+
+    public function getShipping(): Shipping
+    {
+        return $this->shipping;
+    }
+
+    public function setShipping(Shipping $shipping): void
+    {
+        $this->shipping = $shipping;
     }
 }
