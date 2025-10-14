@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\architecture\onion\application\services\ProductService;
+use App\architecture\onion\application\services\ProductApplicationService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    private ProductService $productService;
-    public function __construct(ProductService $productService)
+    private ProductApplicationService $productService;
+    public function __construct(ProductApplicationService $productService)
     {
         $this->productService = $productService;
     }

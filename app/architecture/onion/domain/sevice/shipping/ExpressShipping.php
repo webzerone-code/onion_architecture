@@ -7,16 +7,16 @@ class ExpressShipping implements ShippingInterface
 
     public function name(): string
     {
-        // TODO: Implement name() method.
+        return "Express";
     }
 
     public function cost(float $subtotal): float
     {
-        // TODO: Implement cost() method.
+        return $subtotal + 100;
     }
 
     public function etaDays(): int
     {
-        // TODO: Implement etaDays() method.
+        return 15;
     }
 }
