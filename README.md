@@ -14,7 +14,7 @@ app/
 │       │   │   ├── Category.php<br/>
 │       │   │   └── Tag.php<br/>
 │       │   ├── repository/<br/>
-│       │   │   └── ProductRepositoryInterface.php
+│       │   │   └── ProductRepositoryInterface.php<br/>
 │       │   └── service/<br/>
 │       │       ├── product/<br/>
 │       │       │   ├── ProductService.php<br/>
