@@ -1,61 +1,86 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Onion Architecture Example in Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This project demonstrates a clean implementation of Onion Architecture in Laravel, focusing on domain-driven design (DDD) principles.
 
-## About Laravel
+It currently includes a working Product creation use case with shipping calculation, illustrating domain services, application services, and repository abstraction.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+📂 Project Structure
+app/
+├── architecture/<br/>
+│   └── onion/<br/>
+│       ├── domain/<br/>
+│       │   ├── entity/<br/>
+│       │   │   ├── Product.php<br/>
+│       │   │   ├── Category.php<br/>
+│       │   │   └── Tag.php<br/>
+│       │   ├── repository/<br/>
+│       │   │   └── ProductRepositoryInterface.php
+│       │   └── service/<br/>
+│       │       ├── product/<br/>
+│       │       │   ├── ProductService.php<br/>
+│       │       │   └── ProductServiceInterface.php<br/>
+│       │       └── shipping/<br/>
+│       │           └── ExpressShipping.php<br/>
+│       └── application/<br/>
+│           └── services/<br/>
+│               └── ProductApplicationService.php<br/>
+└── infrastructure/<br/>
+└── persistence/<br/>
+└── EloquentProductRepository.php<br/>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+🧱 Layers Explanation
+1️⃣ Domain Layer
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Entities: Product, Category, Tag — hold business data.
 
-## Learning Laravel
+Repositories: ProductRepositoryInterface — abstraction for persistence.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Domain Services:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+ProductService — orchestrates domain rules like calculating shipping cost.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Depends on abstractions (ShippingInterface) for flexibility.
 
-## Laravel Sponsors
+Shipping strategy: ExpressShipping implements shipping calculation.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+2️⃣ Application Layer
 
-### Premium Partners
+ProductApplicationService:
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Coordinates creation of Product entity.
 
-## Contributing
+Calls ProductService to enrich product data (shipping cost).
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Persists product using ProductRepositoryInterface.
 
-## Code of Conduct
+Maintains stateless orchestration, no domain logic leaks.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+3️⃣ Infrastructure Layer
 
-## Security Vulnerabilities
+EloquentProductRepository:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Implements ProductRepositoryInterface.
 
-## License
+Handles actual database operations.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+⚙️ How It Works
+
+Application Service receives input to create a product.
+
+Calls ProductService (domain service) to calculate shipping cost.
+
+Sets the shipping cost on the Product entity.
+
+Persists the entity via repository.
+
+✅ This keeps the domain pure, application orchestrates, and infrastructure handles persistence.
+
+🏆 Current Achievements
+
+Clean Product creation workflow following Onion principles.
+
+Domain service (ProductService) depends only on ShippingInterface.
+
+Application service orchestrates without holding state.
+
+Flexible for multiple shipping strategies in the future.
