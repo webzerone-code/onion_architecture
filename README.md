@@ -28,7 +28,7 @@ app/
 └── persistence/<br/>
 └── EloquentProductRepository.php<br/>
 
-🧱 Layers Explanation
+🧱 Layers Explanation<br/>
 1️⃣ Domain Layer
 
 Entities: Product, Category, Tag — hold business data.
