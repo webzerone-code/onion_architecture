@@ -6,7 +6,7 @@ namespace App\architecture\onion\domain\entity;
 class Product extends AbstractEntity
 {
     private Category $category;
-    private Tag $tag;
+    private array $tag;
 
     private ?Shipping $shipping = null;
     public string $productTitle;

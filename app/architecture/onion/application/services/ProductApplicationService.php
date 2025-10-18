@@ -37,7 +37,7 @@ class ProductApplicationService
         $product->setProductDescription($productDescription);
         $product->setProductImage($productImage);
 
-        $productPrice = $this->productService->getShippingCost($productPrice,$this->shippingFactoryInterface->make('express'));
+        $productPrice = $this->productService->getShippingCost($productPrice,$this->shippingFactoryInterface->make('express')); // this need to be changes no need to inject the shipping in the product service u can simply call the shipping service and add the price for the actual product
 
         $product->setProductPrice($productPrice);
         $dbProduct = $this->productRepositoryInterface->create($product);
