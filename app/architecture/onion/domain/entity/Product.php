@@ -6,13 +6,19 @@ namespace App\architecture\onion\domain\entity;
 class Product extends AbstractEntity
 {
     private Category $category;
-    private array $tag;
+
 
     private ?Shipping $shipping = null;
-    public string $productTitle;
-    public string $productDescription;
-    public string $productImage;
-    public float $productPrice;
+    private string $productTitle;
+    private string $productDescription;
+    private string $productImage;
+    private float $productPrice;
+
+    private int $stock = 0;
+
+    private array $tag = [];
+    public array $productOptions = [];
+    public array $productVariants = [];
 
     public function getCategory(): Category
     {
@@ -24,12 +30,12 @@ class Product extends AbstractEntity
         $this->category = $category;
     }
 
-    public function getTag(): Tag
+    public function getTag(): array
     {
         return $this->tag;
     }
 
-    public function setTag(Tag $tag): void
+    public function setTag(array $tag): void
     {
         $this->tag = $tag;
     }
@@ -82,5 +88,35 @@ class Product extends AbstractEntity
     public function setShipping(Shipping $shipping): void
     {
         $this->shipping = $shipping;
+    }
+
+    public function getProductOptions(): array
+    {
+        return $this->productOptions;
+    }
+
+    public function setProductOptions(array $productOptions): void
+    {
+        $this->productOptions = $productOptions;
+    }
+
+    public function getProductVariants(): array
+    {
+        return $this->productVariants;
+    }
+
+    public function setProductVariants(array $productVariants): void
+    {
+        $this->productVariants = $productVariants;
+    }
+
+    public function getStock(): int
+    {
+        return $this->stock;
+    }
+
+    public function setStock(int $stock): void
+    {
+        $this->stock = $stock;
     }
 }

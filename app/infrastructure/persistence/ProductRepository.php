@@ -18,7 +18,6 @@ class ProductRepository implements ProductRepositoryInterface
     {
         $product = $this->model::query()->create([
             'category_id'=>$entity->getCategory()->getId(),
-            'tag_id'=>$entity->getTag()->getId(),
             'productTitle'=>$entity->getProductTitle(),
             'productDescription'=>$entity->getProductDescription(),
             'productImage'=>$entity->getProductImage(),
